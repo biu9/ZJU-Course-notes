@@ -1,0 +1,22 @@
+# 测试数据位置：pac2021_publish/data/proteasome-bin6
+        #  子目录Result_NewMRCCTF_NewWBP：保存了一个正确结果，用于参考
+        #  para_reconstruction_proteasome_WBP_bin6.conf ：运行参数文件，不需要修改
+        #  defocus_file.txt，pro_novpp_Cor2.tlt，psi.txt：计算过程中需要的数值文件，不需要修改
+        #  pro_novpp_Cor2_bin6.ali：主要输入文件，不需要修改
+        #  subExeSerial.sh：提交作业脚本，根据测试需要修改
+                ## 提交命令：sbatch subExeSerial.sh
+               ## binPath变量，指定WBP可执行程序tomo_cpu所在路径
+               ## 脚本会根据编译路径，提交该路径下的tomo_cpu程序
+               ## 脚本（程序）成功执行完毕后，应该会在当前路径下生成一个结果文件pro_novpp_Cor2_WBP_bin6.rec
+                ## 运行参数para_reconstruction_proteasome_WBP_bin6.conf是程序的配置文件，其中path用于指定输入数据的目录（默认为当前路径），output_mrc是输出结果文件名，其他参数不需要修改。 
+
+# 代码位置：pac2021_publish/WBP
+        #编译方式：在WBP目录下创建一个build目录，进入build目录后执行cmake ../ & make，即可完成
+代码编译。
+        #编译完成后会有两个可执行程序
+                ## tomo_cpu：就是我们需要优化的可执行程序。可以通过在data/proteasome-bin6中执 
+行sbatch subExeSerial.sh提交程序。
+                ## validate：验证程序，用于比较计算结果与参考结果之间的差异。
+                        ### 使用方式：./validate_cpu  结果1路径   结果2路径（pac2021_publish/data/proteasome-bin6/Result_NewMRCCTF_NewWBP当中的参考数据）
+                        ### 会输出两者的error，以及一些用于参考的指标。
+                        ### 最后输出Validation Passed!即可视为结果验证通过
